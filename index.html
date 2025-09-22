@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Joke Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        #joke {
+            font-size: 24px;
+            margin: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Random Joke Generator</h1>
+    <div id="joke">Click the button for a joke!</div>
+    <button id="jokeBtn">Get Joke</button>
+
+    <script>
+        const jokeBtn = document.getElementById('jokeBtn');
+        const jokeDiv = document.getElementById('joke');
+
+        jokeBtn.addEventListener('click', () => {
+            fetch('https://official-joke-api.appspot.com/random_joke')
+                .then(response => response.json())
+                .then(data => {
+                    jokeDiv.innerHTML = `<strong>${data.setup}</strong><br>${data.punchline}`;
+                })
+                .catch(error => {
+                    jokeDiv.innerHTML = 'Oops! Something went wrong.';
+                });
+        });
+    </script>
+</body>
+</html>
